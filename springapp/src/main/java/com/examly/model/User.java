@@ -5,13 +5,20 @@ import javax.persistence.Id;
 
 @Entity
 public class User {
-	@Id
+    @Id
+    private int id;
 	private String email;
 	private String password;
 	private String username;
-	private String mobileNumber;
     private boolean active;
 	private String role;
+    private String mobileNumber;
+    public int getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
     public String getEmail() {
         return email;
     }
@@ -30,12 +37,6 @@ public class User {
     public void setUsername(String username) {
         this.username = username;
     }
-    public String getMobileNumber() {
-        return mobileNumber;
-    }
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
-    }
     public boolean isActive() {
         return active;
     }
@@ -48,5 +49,10 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
+    public String getMobileNumber() {
+        return mobileNumber;
+    }
+    public void setMobileNumber(String mobileNumber) {
+        this.mobileNumber = mobileNumber;
+    }
 }

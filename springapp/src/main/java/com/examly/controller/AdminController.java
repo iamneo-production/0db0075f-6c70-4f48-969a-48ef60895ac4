@@ -13,19 +13,43 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.examly.dao.IUser;
 import com.examly.model.User;
+import com.examly.dao.IMusic;
+import com.examly.model.Music;
 
 @RestController
 public class AdminController {
 	@Autowired
 	IUser user;
-	
-	@GetMapping("/")
-	public String welcome() {
-		return "welcome spring boot application";
+	IMusic music;
+	@GetMapping("admin")
+	public String findAll() {
+		user.findAll(); 
+		return "Array of Music";
+	}
+	@DeleteMapping("admin/delete/{id}")
+	public String delete(@PathVariable("id")int id) {
+		user.deleteById(id);
+		return "User deleted";
 	}
 	
-	@GetMapping("findall")
-	public List<User> findAll() {
-		return user.findAll();
+	@PutMapping("admin/userEdit/{id}")
+	public String update(@RequestBody User u,@PathVariable("id")int id) {
+		user.findById(id).map(us->{
+			us.setEmail(u.getEmail());
+			us.setPassword(u.getPassword());
+			us.setUsername(u.getUsername());
+			us.setActive(u.isActive());
+			us.setRole(u.getRole());
+			us.setMobileNumber(u.getMobileNumber());
+			return user.save(us);
+		});
+		
+		return "Save the Changes";
 	}
+	@PostMapping("admin/addUser")
+	public String add(@RequestBody User u) {
+		user.saveAndFlush(u);
+		return "User added";
+	}
+
 }

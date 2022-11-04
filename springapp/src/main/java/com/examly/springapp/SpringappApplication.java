@@ -7,9 +7,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("dao")
-@EntityScan("model")
-@ComponentScan("controller")
+@EnableJpaRepositories("com.examly.dao")
+@EntityScan("com.examly.model")
+@ComponentScan("com.examly.controller")
 public class SpringappApplication {
 
 	public static void main(String[] args) {
